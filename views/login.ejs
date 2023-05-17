@@ -6,6 +6,9 @@
 </head>
 <body>
   <h1>Login</h1>
+  <% if (message) { %>
+    <%= message %>
+  <% } %>
   <form action="/auth/login" method="POST">
     <label for="email">Email:</label>
     <input type="email" id="email" name="email" required>

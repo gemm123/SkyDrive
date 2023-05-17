@@ -8,6 +8,7 @@ class UserRoute {
     router.post('/register', UserController.postRegister);
     router.get('/login', UserController.login);
     router.post('/login', UserController.postLogin);
+    router.get('/logout', UserController.logout);
     return router;
   }
 }

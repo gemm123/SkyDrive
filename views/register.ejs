@@ -6,6 +6,9 @@
 </head>
 <body>
   <h1>Register</h1>
+  <% if (message) { %>
+    <%= message %>
+  <% } %>
   <form action="/auth/register" method="POST">
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" required>
