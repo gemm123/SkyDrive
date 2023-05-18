@@ -1,0 +1,21 @@
+<!-- views/upload.ejs -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Photo</title>
+</head>
+<body>
+    <h1>Upload Photo</h1>
+    <form action="/upload/photo" method="POST" enctype="multipart/form-data">
+        <div>
+            <label for="name">Nama:</label>
+            <input type="text" name="name" id="name" required>
+        </div>
+        <div>
+            <label for="photo">Photo:</label>
+            <input type="file" name="photo" accept="image/*" required>
+        </div>
+        <button type="submit">Unggah</button>
+    </form>
+</body>
+</html>

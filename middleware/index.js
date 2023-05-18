@@ -5,6 +5,7 @@ exports.checkAuthorization = (req, res, next) => {
     const token = req.session.token
     
     if (!token) {
+        console.log("token tidak ada")
         req.session.message = "login first";
         res.redirect(301, '/auth/login');
     }
