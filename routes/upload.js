@@ -5,7 +5,7 @@ const { checkAuthorization } = require('../middleware');
 const multer = require('multer');
 const { v4: uuidv4 } = require('uuid');
 
-const storage = multer.diskStorage({
+const storagePhoto = multer.diskStorage({
     destination: (req, file, cb) => {
       cb(null, 'uploads/'); // Menentukan folder penyimpanan file
     },
@@ -17,12 +17,27 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({ storage: storage });
+const storageFile = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/'); // Menentukan folder penyimpanan file
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = uuidv4(); // Generate UUID sebagai bagian dari nama file
+    const fileExtension = file.originalname.split('.').pop(); // Dapatkan ekstensi file
+    const fileName = `file-${uniqueSuffix}.${fileExtension}`; // Buat nama file yang unik
+    cb(null, fileName);
+  }
+});
+
+const uploadPhoto = multer({ storage: storagePhoto });
+const uploadFile = multer({ storage: storageFile });
 
 class UploadRoute {
   static initialize() {
     router.get('/photo', checkAuthorization, UploadController.uploadPhoto);
-    router.post('/photo', checkAuthorization, upload.single('photo'), UploadController.postUploadPhoto);
+    router.post('/photo', checkAuthorization, uploadPhoto.single('photo'), UploadController.postUploadPhoto);
+    router.get('/file', checkAuthorization, UploadController.uploadFile);
+    router.post('/file', checkAuthorization, uploadFile.single('file'), UploadController.postUploadFile);
     return router;
   }
 }

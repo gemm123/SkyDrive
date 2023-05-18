@@ -12,5 +12,6 @@ const File = sequelize.define('File', {
 });
 
 File.belongsTo(Upload, { as: 'upload', foreignKey: 'uploadId' });
+Upload.hasOne(File, { foreignKey: 'uploadId' });
 
 module.exports = File;

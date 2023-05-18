@@ -1,0 +1,14 @@
+<a href="/upload/file">Upload File</a>
+
+<ul>
+    <% data.forEach(d => { %>
+      <li>
+        <p><%= d.name %></p>
+        <img src="<%= d.path %>" alt="<%= d.name %>">
+        <form action="/file/delete" method="POST">
+            <input type="hidden" name="uploadId" value="<%= d.id %>"> <!-- Ganti dengan ID yang sesuai -->
+            <button type="submit">Delete</button>
+        </form>
+      </li>
+    <% }); %>
+</ul>
