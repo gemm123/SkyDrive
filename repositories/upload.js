@@ -24,22 +24,25 @@ class UploadRepository {
 
     async getAllUploadPhotoByUserId(userId) {
         try {
-            const uploadPhoto = await Upload.findAll({
-                attributes: ['id' ,'name', 'path'],
-                where: {},
+            const uploadPhoto = await Photo.findAll({
+                attributes: [],
                 include: [
                     {
-                        model: Photo,
-                        required: false,
-                    },
-                    {
+                    model: Upload,
+                    attributes: ['id', 'name', 'path'],
+                    as: 'upload',
+                    include: [
+                        {
                         model: User,
                         where: {
                             id: userId,
                         },
+                        },
+                    ],
                     },
                 ],
             })
+            console.log(uploadPhoto[0].upload);
             return uploadPhoto;
         } catch (error) {
             throw error;
@@ -107,6 +110,34 @@ class UploadRepository {
                     id: uploadId,
                 }
             })
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async getAllUpload(userId) {
+        try {
+            const uploads = await Upload.findAll({
+                attributes: ['id', 'name', 'path'],
+                include: [
+                    {
+                        model: Photo,
+                        attributes: [],
+                    },
+                    {
+                        model: File,
+                        attributes: [],
+                    },
+                    {
+                        model: User,
+                        where: {
+                            id: userId,
+                        },
+                        attributes: [],
+                    },
+                ]
+            });
+            return uploads;
         } catch (error) {
             throw error;
         }

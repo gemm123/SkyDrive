@@ -5,7 +5,7 @@ const { checkAuthorization } = require('../middleware');
 
 class HomeRoute {
   static initialize() {
-    router.get('/', checkAuthorization, HomeController.homePage);
+    router.get('/', checkAuthorization, HomeController.getAllUpload);
     return router;
   }
 }
