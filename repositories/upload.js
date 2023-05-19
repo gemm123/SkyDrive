@@ -42,7 +42,6 @@ class UploadRepository {
                     },
                 ],
             })
-            console.log(uploadPhoto[0].upload);
             return uploadPhoto;
         } catch (error) {
             throw error;
@@ -51,19 +50,21 @@ class UploadRepository {
 
     async getAllUploadFileByUserId(userId) {
         try {
-            const uploadFile = await Upload.findAll({
-                attributes: ['id' ,'name', 'path'],
-                where: {},
+            const uploadFile = await File.findAll({
+                attributes: [],
                 include: [
                     {
-                        model: File,
-                        required: false,
-                    },
-                    {
-                        model: User,
-                        where: {
-                            id: userId,
-                        },
+                        model: Upload,
+                        attributes: ['id', 'name', 'path'],
+                        as: 'upload',
+                        include: [
+                            {
+                            model: User,
+                            where: {
+                                id: userId,
+                            },
+                            },
+                        ],
                     },
                 ],
             })

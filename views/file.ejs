@@ -3,10 +3,10 @@
 <ul>
     <% data.forEach(d => { %>
       <li>
-        <p><%= d.name %></p>
-        <img src="<%= d.path %>" alt="<%= d.name %>">
+        <p><%= d.upload.name %></p>
+        <img src="<%= d.upload.path %>" alt="<%= d.upload.name %>">
         <form action="/file/delete" method="POST">
-            <input type="hidden" name="uploadId" value="<%= d.id %>"> <!-- Ganti dengan ID yang sesuai -->
+            <input type="hidden" name="uploadId" value="<%= d.upload.id %>"> <!-- Ganti dengan ID yang sesuai -->
             <button type="submit">Delete</button>
         </form>
       </li>

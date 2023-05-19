@@ -4,7 +4,7 @@
     <% data.forEach(d => { %>
       <li>
         <p><%= d.upload.name %></p>
-        <img src="<%= d.upload.path %>" alt="<%= d.name %>">
+        <img src="<%= d.upload.path %>" alt="<%= d.upload.name %>">
         <form action="/photo/delete" method="POST">
             <input type="hidden" name="uploadId" value="<%= d.upload.id %>"> <!-- Ganti dengan ID yang sesuai -->
             <button type="submit">Delete</button>
