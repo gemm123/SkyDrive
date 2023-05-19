@@ -10,5 +10,36 @@
   <a href="/upload/photo">Upload Photo</a>
   <a href="/photo">Photo</a>
   <a href="/file">File</a>
+
+  <ul>
+    <% data.forEach(d => { %>
+      <% if (d.path.includes("file")) { %>
+        <li>
+          <p><%= d.name %></p>
+          <% if (d.path.includes(".pdf")) { %>
+            <img src="<%= 'uploads/pdf.png' %>" alt="<%= d.name %>">
+          <% } else if (d.path.includes(".docx")) {%>
+            <img src="<%= 'uploads/word.png' %>" alt="<%= d.name %>">
+          <% } %>
+          <form action="/file/delete" method="POST">
+              <input type="hidden" name="uploadId" value="<%= d.id %>"> <!-- Ganti dengan ID yang sesuai -->
+              <button type="submit">Delete</button>
+          </form>
+        </li>
+      <% } else { %>
+        <li>
+          <p><%= d.name %></p>
+          <img src="<%= d.path %>" alt="<%= d.name %>">
+          <form action="/photo/delete" method="POST">
+              <input type="hidden" name="uploadId" value="<%= d.id %>">
+              <button type="submit">Delete</button>
+          </form>
+        </li>
+      <% } %>
+      
+    <% }); %>
+  </ul>
+
+
 </body>
 </html>

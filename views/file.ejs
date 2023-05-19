@@ -4,7 +4,11 @@
     <% data.forEach(d => { %>
       <li>
         <p><%= d.upload.name %></p>
-        <img src="<%= d.upload.path %>" alt="<%= d.upload.name %>">
+        <% if (d.upload.path.includes(".pdf")) { %>
+          <img src="<%= 'uploads/pdf.png' %>" alt="<%= d.upload.name %>">
+        <% } else if (d.upload.path.includes(".docx")) {%>
+          <img src="<%= 'uploads/word.png' %>" alt="<%= d.upload.name %>">
+        <% } %>
         <form action="/file/delete" method="POST">
             <input type="hidden" name="uploadId" value="<%= d.upload.id %>"> <!-- Ganti dengan ID yang sesuai -->
             <button type="submit">Delete</button>
