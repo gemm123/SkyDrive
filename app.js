@@ -14,6 +14,7 @@ const UserRoutes = require('./routes/user');
 const UploadRoutes = require('./routes/upload');
 const PhotoRoutes = require('./routes/photo');
 const FileRoutes = require('./routes/file');
+const AlbumRoutes = require('./routes/album');
 
 try {
   sequelize.authenticate().then(() => {
@@ -52,6 +53,7 @@ const UserRoute = UserRoutes.initialize();
 const UploadRoute = UploadRoutes.initialize();
 const PhotoRoute = PhotoRoutes.initialize();
 const FileRoute = FileRoutes.initialize();
+const AlbumRoute = AlbumRoutes.initialize();
 
 // Gunakan route
 app.use('/home', HomeRoute);
@@ -59,6 +61,7 @@ app.use('/auth', UserRoute);
 app.use('/upload', UploadRoute);
 app.use('/photo', PhotoRoute);
 app.use('/file', FileRoute);
+app.use('/album', AlbumRoute);
 
 // Jalankan server
 app.listen(3000, () => {

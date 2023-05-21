@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Buat Album Baru</title>
+</head>
+<body>
+  <h1>Buat Album Baru</h1>
+
+  <form action="/album/create" method="POST">
+    <label for="title">Judul:</label>
+    <input type="text" id="title" name="title" required>
+
+    <label for="description">Deskripsi:</label>
+    <textarea id="description" name="description" required></textarea>
+
+    <button type="submit">Buat Album</button>
+  </form>
+</body>
+</html>

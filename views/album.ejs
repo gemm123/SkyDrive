@@ -1,0 +1,10 @@
+<a href="/album/create">Create Album</a>
+
+<ul>
+    <% data.forEach(d => { %>
+      <li>
+        <p><%= d.title %></p>
+        <p><%= d.descrption %></p>
+      </li>
+    <% }); %>
+</ul>
