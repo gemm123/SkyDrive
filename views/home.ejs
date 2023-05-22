@@ -13,6 +13,10 @@
   <a href="/file">File</a>
   <a href="/album">Album</a>
 
+
+  <p><%= user.username %></p>
+  <p><%= user.email %></p>
+
   <ul>
     <% data.forEach(d => { %>
       <% if (d.path.includes("file")) { %>

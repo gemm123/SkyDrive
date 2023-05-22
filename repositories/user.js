@@ -18,6 +18,15 @@ class UserRepository {
             throw error;
         }
     }
+
+    async getUserByUserId(userId) {
+        try {
+            const user = await User.findOne({ where: { id: userId } });
+            return user;
+        } catch (error) {
+            throw error
+        }
+    }
 }
 
 module.exports = UserRepository;

@@ -1,14 +1,17 @@
 const UploadRepository = require("../repositories/upload");
 const FileRepository = require("../repositories/file");
+const UserRepository = require("../repositories/user");
 const fs = require('fs');
 
 class FileController {
     static async getAllUploadFile(req, res) {
         const uploadRepository = new UploadRepository();
+        const userRepository = new UserRepository();
 
         try {
             const files = await uploadRepository.getAllUploadFileByUserId(req.user.id);
-            res.render('file', { data: files });
+            const user = await userRepository.getUserByUserId(req.user.id);
+            res.render('file', { data: files, user: user });
         } catch (error) {
             throw error
         }
