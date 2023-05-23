@@ -9,7 +9,7 @@
   <body>
     <% if (message) { %> <%= message %> <% } %>
     <div class="d-flex flex-row">
-      <div class="d-flex flex-column w-50 vh-100" style="background-image: url('assets/background.png')">
+      <div class="d-flex flex-column w-50 vh-100" style="background-image: url('../uploads/assets/background.png')">
         <div class="text-center p-5 m-5">
           <img src="/uploads/assets/wfh_photo.png" class="mb-3" alt="Work From Home" width="250" />
           <h1 class="text-primary">Jadikan hidup lebih mudah dengan penyimpanan Cloud yang gratis!</h1>
@@ -42,7 +42,7 @@
             <div class="mt-1 mb-4">
               <button type="submit" class="btn btn-light btn-outline-secondary w-100">Daftar dengan akun google</button>
             </div>
-            <p class="text-center">Belum memiliki akun? <a class="link-underline link-underline-opacity-0" href="#">Register</a></p>
+            <p class="text-center">Belum memiliki akun? <a class="link-underline link-underline-opacity-0" href="/auth/register">Register</a></p>
           </form>
         </div>
       </div>
