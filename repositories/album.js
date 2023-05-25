@@ -1,4 +1,5 @@
 const Album = require('../models/album');
+const Photo = require('../models/photo');
 const User = require('../models/user');
 
 class AlbumRepository {
@@ -25,6 +26,35 @@ class AlbumRepository {
             })
 
             return albums;
+        } catch (error) {
+            throw error
+        }
+    }
+
+    async getAlbumById(albumId) {
+        try {
+            const album = await Album.findByPk(albumId);
+            return album;
+        } catch (error) {
+            throw error
+        }
+    }
+
+    async getAlbumPhotoByAlbumId(albumId) {
+        try {
+            const album = await Album.findByPk(albumId, {
+                include: [Photo]
+            });
+
+            const photos = album.Photos;
+            const uploads = [];
+
+            for (const photo of photos) {
+                const upload = await photo.getUpload();
+                uploads.push(upload);
+            }
+
+            return uploads;
         } catch (error) {
             throw error
         }

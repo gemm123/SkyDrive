@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pilih Foto</title>
+  <style>
+    .thumbnail {
+      width: 150px;
+      height: 150px;
+      border: 1px solid #ccc;
+      display: inline-block;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    .selected {
+      border-color: blue;
+    }
+  </style>
+</head>
+<body>
+  <h1>Pilih Foto</h1>
+  <div id="photoContainer">
+    <% data.forEach(d => { %>
+        <div class="thumbnail" onclick="toggleSelection(event, '<%= d.id %>')">
+            <img src="http://localhost:3000/<%= d.upload.path %>" alt="<%= d.upload.name %>">
+        </div>
+    <% }); %>
+    <!-- Tambahkan thumbnail foto lainnya sesuai dengan kebutuhan -->
+  </div>
+  <button onclick="addPhotosToAlbum('<%= albumId %>')">Tambahkan ke Album</button>
+  <script>
+    const selectedPhotos = new Set();
+
+    function toggleSelection(event, photoId) {
+      const thumbnail = event.currentTarget;
+      if (selectedPhotos.has(photoId)) {
+        thumbnail.classList.remove('selected');
+        selectedPhotos.delete(photoId);
+      } else {
+        thumbnail.classList.add('selected');
+        selectedPhotos.add(photoId);
+      }
+    }
+
+    function addPhotosToAlbum(albumId) {
+      // Mengirimkan data foto yang dipilih ke server
+      const selectedPhotoIds = Array.from(selectedPhotos);
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', '/album/add-photo/' + albumId);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.send(JSON.stringify({ selectedPhotoIds }));
+      // Lakukan proses selanjutnya, misalnya mengirimkan ke server menggunakan AJAX
+
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          // Jika berhasil, redirect ke halaman yang diinginkan
+          window.location.href = '/album';
+        } else {
+          // Jika terjadi error, lakukan penanganan yang sesuai
+          console.log('Error:', xhr.status);
+        }
+      };
+    }
+  </script>
+</body>
+</html>

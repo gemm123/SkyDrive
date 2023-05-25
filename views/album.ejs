@@ -4,7 +4,9 @@
     <% data.forEach(d => { %>
       <li>
         <p><%= d.title %></p>
-        <p><%= d.descrption %></p>
+        <p><%= d.description %></p>
+        <a href="/album/add-photo/<%= d.id %>">Add Photo</a>
+        <a href="/album/<%= d.id %>">See Photo</a>
       </li>
     <% }); %>
 </ul>

@@ -1,0 +1,8 @@
+<ul>
+    <% data.forEach(d => { %>
+      <li>
+        <p><%= d.dataValues.name %></p>
+        <img src="http://localhost:3000/<%= d.dataValues.path %>" alt="<%= d.dataValues.name %>">
+      </li>
+    <% }); %>
+</ul>

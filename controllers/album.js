@@ -1,4 +1,6 @@
+const UploadRepository = require("../repositories/upload");
 const AlbumRepository = require('../repositories/album');
+const fs = require('fs');
 
 class AlbumController {
     static createAlbum(req, res) {
@@ -25,6 +27,48 @@ class AlbumController {
             res.render('album', { data: albums });
         } catch (error) {
             throw error
+        }
+    }
+
+    static async addPhotoToAlbum(req, res) {
+        const uploadRepository = new UploadRepository();
+        const albumId = req.params.albumId;
+
+        try {
+            const photos = await uploadRepository.getAllUploadPhotoByUserId(req.user.id);
+            res.render('add-photo-to-album', { data: photos, albumId: albumId });
+        } catch (error) {
+            throw error
+        }
+    }
+
+    static async postAddPhotoToAlbum(req, res) {
+        const uploadRepository = new UploadRepository();
+        const albumRepository = new AlbumRepository();
+        const albumId = req.params.albumId;
+        const selectedPhotoIds = req.body.selectedPhotoIds;
+        
+        try {
+            const album = await albumRepository.getAlbumById(albumId);
+            await album.addPhotos(selectedPhotoIds);
+            res.redirect(302, '/album');
+        } catch (error) {
+            throw error
+        }
+    }
+    
+    static async getPhotoAlbumByAlbumId(req, res) {
+        const albumRepository = new AlbumRepository();
+        const albumId = req.params.albumId;
+
+        try {
+            const photos = await albumRepository.getAlbumPhotoByAlbumId(albumId);
+            photos.forEach((photo) => {
+                console.log(photo.dataValues.name);
+            })
+            res.render('album-photo', { data: photos });
+        } catch (error) {
+            
         }
     }
 }

@@ -25,7 +25,7 @@ class UploadRepository {
     async getAllUploadPhotoByUserId(userId) {
         try {
             const uploadPhoto = await Photo.findAll({
-                attributes: [],
+                attributes: ['id'],
                 include: [
                     {
                     model: Upload,

@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const session = require('express-session');
 const sequelize = require('./database/index');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 
 const User = require('./models/user');
 const File = require('./models/file');
@@ -29,13 +31,16 @@ try {
 
 const path = require('path');
 
+app.use(cors());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Set view engine dan direktori views
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 
-app.use(express.urlencoded({ extended: true }));
+// Menggunakan body parser untuk membaca request body
+app.use(bodyParser.json()); // Untuk membaca JSON
+app.use(bodyParser.urlencoded({ extended: true })); // Untuk membaca URL-encoded
 
 app.use(session({
   secret: 'secret-key',

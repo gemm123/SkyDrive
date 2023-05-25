@@ -8,6 +8,9 @@ class AlbumRoute {
         router.get('/create', checkAuthorization, AlbumController.createAlbum);
         router.post('/create', checkAuthorization, AlbumController.postCreateAlbum);
         router.get('/', checkAuthorization, AlbumController.getAllAlbum)
+        router.get('/add-photo/:albumId', checkAuthorization, AlbumController.addPhotoToAlbum);
+        router.post('/add-photo/:albumId', checkAuthorization, AlbumController.postAddPhotoToAlbum);
+        router.get('/:albumId', checkAuthorization, AlbumController.getPhotoAlbumByAlbumId);
         return router;
     }
 }
