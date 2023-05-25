@@ -1,12 +1,106 @@
-<a href="/album/create">Create Album</a>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SkyDrive</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous" />
+  </head>
+  <body>
+    <!-- Bagian Kiri -->
+    <div class="d-flex flex-column pt-3 pt-5 ps-4 w-50 vh-100 z-0 position-absolute" style="background-image: url(../uploads/assets/background.png)">
+      <!-- Userbox -->
+      <div class="py-4 px-3 m-5 bg-primary-subtle rounded-4" style="width: 45%">
+        <div class="d-flex flex-row">
+          <img src="../uploads/assets/itemphoto/Red.png" class="rounded d-block me-3" alt="usericon" width="75" height="75" />
+          <div class="">
+            <h5 class="mb-0">user</h5>
+            <p class="mb-0">user@email.com</p>
+            <a class="link-underline link-offset-2" href="/auth/logout">Log out</a>
+          </div>
+        </div>
+        <button type="editprofile" class="btn btn-primary mt-3 w-100 shadow-sm">Edit Profile</button>
+      </div>
+      <!-- Nav -->
+      <div class="ps-5">
+        <ul class="nav nav-pills nav-fill flex-column">
+          <li class="nav-item text-start mb-2">
+            <a class="nav-link text-white" href="/home">Semua</a>
+          </li>
+          <li class="nav-item text-start mb-2">
+            <a class="nav-link text-white" href="/file">File Saya</a>
+          </li>
+          <li class="nav-item text-start mb-2">
+            <a class="nav-link text-white" href="/photo">Foto Saya</a>
+          </li>
+          <li class="nav-item text-start mb-2">
+            <a class="nav-link active shadow-sm" aria-current="page" href="/album">Album Saya</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Bagian Kanan -->
+    <div class="d-flex flex-column z-1 position-absolute bg-white rounded-5 vh-100" style="left: 30%; width: 70%">
+      <div class="d-flex justify-content-between p-5 border-bottom">
+        <form class="d-flex w-75">
+          <input class="form-control me-2" type="search" placeholder="Cari di File Saya" aria-label="Search" style="background: #e5e7eb" />
+        </form>
+        <img src="../uploads/assets/cloud.png" class="" alt="" width="50" />
+      </div>
+      <div class="d-flex flex-column px-5 pt-4" style="max-height: 80%">
+        <div class="d-flex flex-row pb-4">
+          <a href="/album/create" class="d-inline-flex btn btn-primary me-3 shadow-sm">+ Buat Album</a>
+        </div>
+        <div class="d-flex justify-content-between pb-1">
+          <h4>Terbaru</h4>
+          <div class="dropdown">
+            <button class="btn dropdown-toggle-hide p-0 m-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+              </svg>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </div>
+        </div>
+        <!--Item list-->
+        <div class="bg-white overflow-auto">
+          <ul class="d-flex flex-wrap list-unstyled">
+            <% data.forEach(d => { %>
+            <li style="height: fit-content">
+              <div class="card rounded-4 mb-3 shadow-sm" style="width: 950px; min-height: 144px; background: #e5e7eb">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h5 class="card-title"><%= d.title %></h5>
+                    <div class="dropdown">
+                      <button class="btn dropdown-toggle-hide p-0 m-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15 " height="15" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                          <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                        </svg>
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li>
+                          <a class="dropdown-item" href="/album/add-photo/<%= d.id %>">Add Photo</a>
+                          <a class="dropdown-item" href="/album/<%= d.id %>">See Photo</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div>
+                    <p class="card-text"><%= d.description %></p>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <% }); %>
+          </ul>
+        </div>
+      </div>
+    </div>
 
-<ul>
-    <% data.forEach(d => { %>
-      <li>
-        <p><%= d.title %></p>
-        <p><%= d.description %></p>
-        <a href="/album/add-photo/<%= d.id %>">Add Photo</a>
-        <a href="/album/<%= d.id %>">See Photo</a>
-      </li>
-    <% }); %>
-</ul>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+  </body>
+</html>

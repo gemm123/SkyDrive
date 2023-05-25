@@ -19,13 +19,13 @@
             <a class="link-underline link-offset-2" href="/auth/logout">Log out</a>
           </div>
         </div>
-        <button type="editprofile" class="btn btn-primary mt-3 w-100">Edit Profile</button>
+        <button type="editprofile" class="btn btn-primary mt-3 w-100 shadow-sm">Edit Profile</button>
       </div>
       <!-- Nav -->
       <div class="ps-5">
         <ul class="nav nav-pills nav-fill flex-column">
-          <li class="nav-item text-start mb-2">
-            <a class="nav-link active" aria-current="page" href="#">Semua</a>
+          <li class="nav-item text-start mb-2 shadow-sm">
+            <a class="nav-link active" aria-current="page" href="/home">Semua</a>
           </li>
           <li class="nav-item text-start mb-2">
             <a class="nav-link text-white" href="/file">File Saya</a>
@@ -43,15 +43,15 @@
     <div class="d-flex flex-column z-1 position-absolute bg-white rounded-5 vh-100" style="left: 30%; width: 70%">
       <div class="d-flex justify-content-between p-5 border-bottom">
         <form class="d-flex w-75">
-          <input class="form-control me-2" type="search" placeholder="Cari di File Saya" aria-label="Search" />
+          <input class="form-control me-2" type="search" placeholder="Cari di File Saya" aria-label="Search" style="background: #e5e7eb" />
         </form>
         <img src="../uploads/assets/cloud.png" class="" alt="" width="50" />
       </div>
-      <div class="d-flex flex-column p-5 vh-100">
-        <div class="d-flex flex-row pb-5">
-          <a href="/upload/photo" class="d-inline-flex btn btn-primary me-3">+ Unggah Foto</a>
-          <a href="/upload/file" class="d-inline-flex btn btn-primary me-3">+ Unggah File</a>
-          <a href="/album/create" class="d-inline-flex btn btn-primary me-3">+ Buat Album</a>
+      <div class="d-flex flex-column px-5 pt-4" style="max-height: 80%">
+        <div class="d-flex flex-row pb-4">
+          <a href="/upload/photo" class="d-inline-flex btn btn-primary me-3 shadow-sm">+ Unggah Foto</a>
+          <a href="/upload/file" class="d-inline-flex btn btn-primary me-3 shadow-sm">+ Unggah File</a>
+          <a href="/album/create" class="d-inline-flex btn btn-primary me-3 shadow-sm">+ Buat Album</a>
         </div>
         <div class="d-flex justify-content-between">
           <h4>Terbaru</h4>
@@ -69,11 +69,11 @@
           </div>
         </div>
         <!--Item list-->
-        <div class="bg-white">
+        <div class="bg-white overflow-auto">
           <ul class="d-flex flex-wrap list-unstyled">
             <% data.forEach(d => { %> <% if (d.path.includes("file")) { %>
             <li style="height: fit-content">
-              <div class="card rounded-4 me-3 mb-3" style="width: 300px; height: 200px">
+              <div class="card rounded-4 me-3 mb-3 shadow-sm" style="width: 300px; height: 200px">
                 <% if (d.path.includes(".pdf")) { %>
                 <img src="<%= 'uploads/pdf.png' %>" class="object-fit-cover overflow-hidden rounded-4 rounded-bottom-0" alt="<%= d.name %>" />
                 <% } else if (d.path.includes(".docx")) {%>
@@ -102,7 +102,7 @@
             </li>
             <% } else { %>
             <li style="height: fit-content">
-              <div class="card rounded-4 me-3 mb-3" style="width: 300px; height: 200px">
+              <div class="card rounded-4 me-3 mb-3 shadow-sm" style="width: 300px; height: 200px">
                 <img src="<%= d.path %>" class="object-fit-cover overflow-hidden rounded-4 rounded-bottom-0" alt="<%= d.name %>" />
                 <div class="d-flex justify-content-between bg-primary bg-opacity-10 rounded-bottom-4 p-2">
                   <p class="ms-3 mb-0"><%= d.name %></p>
