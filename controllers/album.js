@@ -43,7 +43,6 @@ class AlbumController {
     }
 
     static async postAddPhotoToAlbum(req, res) {
-        const uploadRepository = new UploadRepository();
         const albumRepository = new AlbumRepository();
         const albumId = req.params.albumId;
         const selectedPhotoIds = req.body.selectedPhotoIds;
@@ -63,12 +62,21 @@ class AlbumController {
 
         try {
             const photos = await albumRepository.getAlbumPhotoByAlbumId(albumId);
-            photos.forEach((photo) => {
-                console.log(photo.dataValues.name);
-            })
             res.render('album-photo', { data: photos });
         } catch (error) {
-            
+            throw error
+        }
+    }
+
+    static async deleteAlbumByAlbumId(req, res) {
+        const albumRepository = new AlbumRepository();
+        const albumId = req.body.albumId;
+
+        try {
+            await albumRepository.deleteAlbumByAlbumId(albumId);
+            res.redirect(302, '/album')
+        } catch (error) {
+            throw error
         }
     }
 }

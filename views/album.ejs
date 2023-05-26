@@ -85,6 +85,10 @@
                         <li>
                           <a class="dropdown-item" href="/album/add-photo/<%= d.id %>">Add Photo</a>
                           <a class="dropdown-item" href="/album/<%= d.id %>">See Photo</a>
+                          <form action="/album/delete" method="POST">
+                            <input type="hidden" name="albumId" value="<%= d.id %>" />
+                            <button class="dropdown-item" type="submit">Delete</button>
+                          </form>
                         </li>
                       </ul>
                     </div>

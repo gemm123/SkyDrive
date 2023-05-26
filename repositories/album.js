@@ -1,6 +1,8 @@
 const Album = require('../models/album');
 const Photo = require('../models/photo');
 const User = require('../models/user');
+const sequelize = require('../database');
+const { QueryTypes } = require('sequelize');
 
 class AlbumRepository {
     async createAlbum(title, description, userId) {
@@ -55,6 +57,29 @@ class AlbumRepository {
             }
 
             return uploads;
+        } catch (error) {
+            throw error
+        }
+    }
+
+    async deleteAlbumByAlbumId(albumId) {
+        console.log(albumId);
+        try {
+            await sequelize.query(`
+                DELETE FROM "AlbumPhoto"
+                WHERE "albumId" = ?
+            `, {
+                type: QueryTypes.DELETE,
+                replacements: [albumId] 
+            });
+
+            await sequelize.query(`
+                DELETE FROM "Albums"
+                WHERE "id" = ?
+            `, {
+                type: QueryTypes.DELETE,
+                replacements: [albumId]
+            });
         } catch (error) {
             throw error
         }
