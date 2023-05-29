@@ -83,6 +83,8 @@
                     </button>
                     <ul class="dropdown-menu">
                       <li>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#ModalImg">Open</button>
                         <form action="/photo/delete" method="POST">
                           <input type="hidden" name="uploadId" value="<%= d.upload.id %>" />
                           <!-- Ganti dengan ID yang sesuai -->
@@ -100,6 +102,22 @@
       </div>
     </div>
 
+    <% data.forEach(d => { %>
+    <!-- Modal Image-->
+    <div class="modal fade" id="ModalImg" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"><%= d.upload.name %></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <img src="<%= d.upload.path %>" class="img-fluid" alt="<%= d.upload.name %>" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <% }); %>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
   </body>
 </html>
