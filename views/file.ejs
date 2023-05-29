@@ -116,7 +116,10 @@
           </div>
           <div class="modal-body">
             <% if (d.upload.path.includes(".pdf")) { %>
-            <img src="<%= 'uploads/pdf.png' %>" class="img-fluid" alt="<%= d.upload.name %>" />
+            <div>
+              <iframe src="../uploads/file-33adbfb9-0729-483c-bef1-deef1ae5ec4f.pdf" frameborder="0" width="700px" height="600px"></iframe>
+            </div>
+
             <% } else if (d.upload.path.includes(".docx")) {%>
             <img src="<%= 'uploads/word.png' %>" class="img-fluid" alt="<%= d.upload.name %>" />
             <% } %>
